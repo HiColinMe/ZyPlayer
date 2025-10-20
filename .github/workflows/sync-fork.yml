@@ -1,0 +1,21 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天UTC时间00:00同步
+  workflow_dispatch:      # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tgymnich/fork-sync@v2.0
+        with:
+          # 上游仓库的所有者（必须配置）
+          owner: Hiram-Wong
+          # 基础分支（你的fork中的目标分支）
+          base: main
+          # 头部分支（上游仓库的分支）
+          head: main
+          # 使用GitHub自动提供的token
+          token: ${{ github.token }}
